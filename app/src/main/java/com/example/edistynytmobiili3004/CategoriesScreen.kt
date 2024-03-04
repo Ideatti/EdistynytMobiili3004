@@ -12,11 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -58,11 +61,22 @@ fun CategoriesScreen(onMenuClick: () -> Unit) {
                 else -> LazyColumn(){
                     items(categoriesVm.categoriesState.value.list){
                         Column(modifier = Modifier.fillMaxWidth()) {
-                            Row (Modifier.fillMaxWidth().padding(8.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween) {
+                            Row (
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
                                 Text(text = "Kuva")
                                 Column (horizontalAlignment = Alignment.End) {
-                                    Text(text = it.name, fontWeight = FontWeight.ExtraBold)
+                                    Text(text = it.category_name,
+                                        style = MaterialTheme.typography.headlineLarge)
+                                    IconButton(onClick = { /*TODO*/ }) {
+                                        Icon(imageVector =
+                                            Icons.Default.ArrowForward,
+                                            contentDescription = "Siirry")
+
+                                    }
                                 }
                             }
                         }
