@@ -24,13 +24,17 @@ class CategoryViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
         getCategory()
     }
 
+    fun setOk(status: Boolean){
+        _categoryState.value = _categoryState.value.copy(ok=status)
+    }
+
     fun setName(newName: String){
         val item = _categoryState.value.item.copy(name=newName)
         _categoryState.value = _categoryState.value.copy(item = item)
     }
 
 
-    fun editCategory(goToCategories: () -> Unit){
+    fun editCategory(){
         viewModelScope.launch {
             try {
                 _categoryState.value = _categoryState.value.copy(loading = true)
@@ -38,8 +42,7 @@ class CategoryViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
                     _categoryId,
                     EditCategoryReq(name = _categoryState.value.item.name)
                 )
-                goToCategories()
-                Log.d("tomi","done")
+                setOk(true)
             } catch (e: Exception) {
                 _categoryState.value = _categoryState.value.copy(err= e.toString())
             } finally {
