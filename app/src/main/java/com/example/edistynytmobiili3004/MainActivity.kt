@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                                        drawerState.open()
                                    }
                                 }, navigateToEditCategory =  {
-                                    navController.navigate("EditCategoryScreen/${it}")
+                                    navController.navigate("editCategoryScreen/${it}")
                                 })
                             }
                             composable("loginScreen"){
@@ -111,7 +111,11 @@ class MainActivity : ComponentActivity() {
                                 })
                             }
                             composable("editCategoryScreen/{categoryId}"){
-                                EditCategoryScreen()
+                                EditCategoryScreen(backToCategories = {
+                                    navController.navigateUp()
+                                }, goToCategories = {
+                                    navController.navigate("categoriesScreen")
+                                })
                             }
                         }
                     }
